@@ -44,3 +44,28 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+
+# Maven
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.next
+release.properties
+.flattened-pom.xml
+
+# artifacts
+*.log
+*.war
+*.class
+.project
+*.classpath
+*.prefs
+*.name
+
+# intellij
+.idea/
+*.ipr
+*.iws
+*.iml
+out/
+.idea_modules
