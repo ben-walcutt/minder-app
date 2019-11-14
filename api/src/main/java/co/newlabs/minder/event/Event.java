@@ -1,4 +1,4 @@
-package co.newlabs.minder.note;
+package co.newlabs.minder.event;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -6,37 +6,35 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
-@Entity
-@Table(name = "Note")
 @Data
-@Builder
+@Entity
+@Table(name = "Event")
 @AllArgsConstructor
 @NoArgsConstructor
-public class Note {
+@Builder
+public class Event {
     @Id
+    @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column
-    @NotNull
+    private String creator;
+
+    @Column
     private String title;
 
     @Column
-    @NotNull
-    private String text;
+    private LocalDateTime startTimestamp;
 
     @Column
-    @NotNull
-    private String author;
+    private LocalDateTime endTimestamp;
 
     @Column
-    @NotNull
     private LocalDateTime createdTimestamp;
 
     @Column
-    @NotNull
     private LocalDateTime lastUpdatedTimestamp;
 }

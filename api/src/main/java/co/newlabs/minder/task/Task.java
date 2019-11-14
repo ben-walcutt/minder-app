@@ -1,4 +1,4 @@
-package co.newlabs.minder.note;
+package co.newlabs.minder.task;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -6,37 +6,41 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
-@Entity
-@Table(name = "Note")
 @Data
-@Builder
+@Entity
+@Table(name = "Task")
 @AllArgsConstructor
 @NoArgsConstructor
-public class Note {
+@Builder
+public class Task {
     @Id
+    @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column
-    @NotNull
-    private String title;
-
-    @Column
-    @NotNull
-    private String text;
-
-    @Column
-    @NotNull
     private String author;
 
     @Column
-    @NotNull
+    private String title;
+
+    @Column
+    private String text;
+
+    @Column
     private LocalDateTime createdTimestamp;
 
     @Column
-    @NotNull
     private LocalDateTime lastUpdatedTimestamp;
+
+    @Column
+    private LocalDateTime dueDateTimestamp;
+
+    @Column
+    private boolean completed;
+
+    @Column
+    private LocalDateTime completedTimestamp;
 }
