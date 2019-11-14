@@ -1,0 +1,31 @@
+<div class="container col-container">
+    <h1>Create New Event</h1>
+    <form>
+        <h6>{{ event.createtime | date:'short' }}</h6>
+        <br />
+        <input class="form-control" type="text" id="eventTitle" name="eventTitle" placeholder="New Event Title"
+            [(ngModel)]="event.title" />
+        <div class="form-group">
+            <label for="eventTags">
+                <h5>Tags</h5>
+            </label>
+            <p-chips name="eventTags" [(ngModel)]="event.tags"></p-chips>
+        </div>
+        <div class="form-group">
+            <label for="eventStartTime">
+                <h5>Start time</h5>
+            </label><br />
+            <p-calendar id="eventStartTime" name="eventStartTime" [(ngModel)]="event.starttime" [showTime]="true">
+            </p-calendar>
+        </div>
+        <div class="form-group">
+            <label for="eventEndTime">
+                <h5>End time</h5>
+            </label><br />
+            <p-calendar id="eventEndTime" name="eventEndTime" [(ngModel)]="event.endtime" [showTime]="true">
+            </p-calendar>
+        </div>
+        <br />
+        <button class="btn btn-primary" (click)="createEvent()">Create New Event</button>
+    </form>
+</div>

@@ -1,0 +1,29 @@
+<div class="container col-container">
+    <h1>Tasks</h1>
+    <div class="text-primary p-2 create">
+        <a routerLink="/tasks/create"><i class="fas fa-plus"></i> create new task</a>
+    </div>
+    <p-table [value]="tasks$ | async" selectionMode="single" [(selection)]="selectedTask" rowKey="id" (onRowSelect)="onRowSelect($event)">
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Title</th>
+                <th>Tags</th>
+                <th>Due Date</th>
+                <th>Updated On</th>
+                <th>Status</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-task>
+            <tr [pSelectableRow]="task">
+                <td>{{task.title.substring(0, 50)}}</td>
+                <td>{{generateBadges(task.tags)}}</td>
+                <td [ngClass]="{'text-danger': isOverdue(task)}"><i *ngIf="isOverdue(task)" class="fas fa-exclamation-triangle"> </i>{{task.duetime | date:'short'}}</td>
+                <td>{{task.lastupdatetime | date:'short'}}</td>
+                <td>
+                    <i class="fas" [ngClass]="{'fa-plus text-success': task.complete, 'fa-minus text-warning': !task.complete}"> </i>
+                    <span class="text-success" *ngIf="task.complete"> on {{ task.completetime | date:'short' }}</span>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>

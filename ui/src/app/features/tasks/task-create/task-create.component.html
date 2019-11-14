@@ -1,0 +1,19 @@
+<div class="container col-container">
+    <h1>Create New Task</h1>
+    <form>
+        <h6>{{ task.createtime | date:'short' }}</h6>
+        <br />
+        <input class="form-control" type="text" id="taskTitle" name="taskTitle" placeholder="New Title" [(ngModel)]="task.title" />
+        <div class="form-group">
+            <label for="taskTags"><h5>Tags</h5></label>
+            <p-chips name="taskTags" [(ngModel)]="task.tags"></p-chips>
+        </div>
+        <!-- time -->
+        <div class="form-group">
+            <label for="taskTime"><h5>Due Datetime</h5></label><br />
+            <p-calendar id="taskTime" name="taskTime" [(ngModel)]="task.duetime" [showTime]="true"></p-calendar>
+        </div>
+        <br />
+        <button class="btn btn-primary" (click)="createTask()">Create New Task</button>
+    </form>
+</div>

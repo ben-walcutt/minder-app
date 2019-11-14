@@ -1,0 +1,16 @@
+<div class="container col-container">
+    <h1>Create New Note</h1>
+    <form>
+        <h6>{{ note.createtime | date:'short' }}</h6>
+        <br />
+        <input class="form-control" type="text" id="noteTitle" name="noteTitle" placeholder="New Title" [(ngModel)]="note.title" />
+        <br />
+        <p-chips name="noteTags" [(ngModel)]="note.tags"></p-chips>
+        <br />
+        <p-editor id="noteText" name="noteText" [(ngModel)]="note.text" [style]="{'height': '320px'}"></p-editor>
+        <br />
+        <button class="btn btn-primary" (click)="createNote()">Create New Note</button>
+    </form>
+</div>
+
+<p-toast></p-toast>

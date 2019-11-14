@@ -1,0 +1,11 @@
+.open-icon {
+    font-weight: lighter !important;
+}
+
+.open-icon:hover {
+    cursor: pointer;
+}
+
+.complete-icon:hover {
+    cursor: pointer;
+}

@@ -1,0 +1,10 @@
+.open-icon {
+    font-weight: lighter !important;
+}
+.open-icon:hover {
+    cursor: pointer;
+}
+
+span:hover {
+    cursor: pointer;
+}

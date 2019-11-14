@@ -1,0 +1,14 @@
+<div class="container col-container">
+    <form>
+        <h1>{{ note.title }}</h1>
+        <h6>Last updated on: {{ note.lastupdatetime | date:'short' }}</h6>
+        <p-chips name="noteTags" [(ngModel)]="note.tags"></p-chips>
+        <p-editor id="noteText" name="noteText" [(ngModel)]="note.text" [style]="{'height': '320px'}"></p-editor>
+        <br />
+        <button class="btn btn-primary mb-2" style="width: 125px" (click)="update()">Update Note</button>
+        <br />
+        <button class="btn btn-warning" style="width: 125px" (click)="delete()">Delete Note</button>
+    </form>
+</div>
+<p-toast></p-toast>
+

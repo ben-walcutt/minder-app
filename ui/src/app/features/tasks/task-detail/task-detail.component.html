@@ -1,0 +1,110 @@
+<div class="container col-container">
+    <form>
+        <h1>{{ task.title }}</h1>
+        <h6>{{ task.createtime | date:'short' }}</h6>
+        <h6 class="text-primary complete" (click)="completeTask()" *ngIf="!task.complete"><i class="far fa-square"> </i>
+            mark as complete</h6>
+        <h6 class="text-success" *ngIf="task.complete"><i class="fas fa-check"> </i> completed on
+            {{ task.completetime | date:'short' }}</h6>
+        <br />
+        <div class="form-group">
+            <label for="taskTags">
+                <h5>Tags</h5>
+            </label>
+            <p-chips name="taskTags" [(ngModel)]="task.tags"></p-chips>
+        </div>
+        <!-- time -->
+        <div class="form-group">
+            <label for="taskTime">
+                <h5>Due Datetime</h5>
+            </label><br />
+            <p-calendar id="taskTime" name="taskTime" [(ngModel)]="task.duetime" [showTime]="true"></p-calendar>
+        </div>
+        <br />
+        <p-editor id="taskText" name="taskText" [(ngModel)]="task.text" [style]="{'height': '320px'}"></p-editor>
+        <br />
+        <button class="btn btn-primary mb-2" style="width: 125px;" (click)="updateTask()">
+            Update Task
+        </button>
+        <br />
+        <button class="btn btn-warning mb-2" style="width: 125px;" (click)="deleteTask()">
+            Delete Task
+        </button>
+    </form>
+    <hr />
+    <div>
+        <h3>Related Items</h3>
+        <div class="flex row-container">
+            <button class="btn btn-primary m-2" style="width: 200px;" (click)="addNoteVisible = true;">
+                Add Related Note
+            </button>
+            <button class="btn btn-primary m-2" style="width: 200px" (click)="addEventVisible = true;">
+                Add Related Event
+            </button>
+        </div>
+        <h6>Notes</h6>
+        <div class="flex row-container" style="flex-wrap: wrap">
+            <div class="m-3" *ngFor="let note of (relatedNotes$ | async)">
+                <app-note-summary [note]="note" ></app-note-summary>
+            </div>
+        </div>
+        <h6>Events</h6>
+        <div class="flex row-container" style="flew-wrap: wrap">
+            <div class="m-3" *ngFor="let event of (relatedEvents$ | async)">
+                <app-event-summary [event]="event"></app-event-summary>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<p-toast></p-toast>
+<p-sidebar [(visible)]="addNoteVisible" position="right" styleClass="ui-sidebar-md">
+    <h3>Add Related Note</h3>
+    <div class="container col-container">
+        <form>
+            <h6>{{ relatedNote.createtime | date:'short' }}</h6>
+            <br />
+            <input class="form-control" type="text" id="noteTitle" name="noteTitle" placeholder="New Title" [(ngModel)]="relatedNote.title" />
+            <br />
+            <p-chips name="noteTags" [(ngModel)]="relatedNote.tags"></p-chips>
+            <br />
+            <p-editor id="noteText" name="noteText" [(ngModel)]="relatedNote.text" [style]="{'height': '320px'}"></p-editor>
+            <br />
+            <button class="btn btn-primary" (click)="createNote()">Create New Note</button>
+        </form>
+    </div>
+</p-sidebar>
+<p-sidebar [(visible)]="addEventVisible" position="right" styleClass="ui-sidebar-md">
+    <h3>Add Related Event</h3>
+    <div class="container col-container">
+            <form>
+                <h6>{{ relatedEvent.createtime | date:'short' }}</h6>
+                <br />
+                <input class="form-control" type="text" id="eventTitle" name="eventTitle" placeholder="New Event Title"
+                    [(ngModel)]="relatedEvent.title" />
+                <div class="form-group">
+                    <label for="eventTags">
+                        <h5>Tags</h5>
+                    </label>
+                    <p-chips name="eventTags" [(ngModel)]="relatedEvent.tags"></p-chips>
+                </div>
+                <div class="form-group">
+                    <label for="eventStartTime">
+                        <h5>Start time</h5>
+                    </label><br />
+                    <p-calendar id="eventStartTime" name="eventStartTime" [(ngModel)]="relatedEvent.starttime" [showTime]="true">
+                    </p-calendar>
+                </div>
+                <div class="form-group">
+                    <label for="eventEndTime">
+                        <h5>End time</h5>
+                    </label><br />
+                    <p-calendar id="eventEndTime" name="eventEndTime" [(ngModel)]="relatedEvent.endtime" [showTime]="true">
+                    </p-calendar>
+                </div>
+                <br />
+                <button class="btn btn-primary" (click)="createEvent()">Create New Event</button>
+            </form>
+        </div>
+</p-sidebar>

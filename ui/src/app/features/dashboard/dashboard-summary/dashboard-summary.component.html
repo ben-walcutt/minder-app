@@ -1,0 +1,64 @@
+<div class="container col-container">
+    <a routerLink="/events" style="color: #212529">
+        <h1>Upcoming Events</h1>
+    </a>
+    <div class="upcoming-events">
+        <div class="text-primary p-2 create">
+            <a routerLink="events/create"><i class="fas fa-plus"></i> create new event</a>
+        </div>
+        <div class="flex row-container aligned" style="flex-wrap: wrap"
+            *ngIf="(upcomingEvents$ | async).length > 0; else noEvents">
+            <div class="m-3" *ngFor="let event of (upcomingEvents$ | async)">
+                <app-event-summary [event]="event"></app-event-summary>
+            </div>
+        </div>
+    </div>
+    <!-- <hr /> -->
+    <a routerLink="/tasks" style="color: #212529">
+        <h1>Open Tasks</h1>
+    </a>
+    <div class="open-tasks">
+        <div class="text-primary p-2 create">
+            <a routerLink="/tasks/create"><i class="fas fa-plus"></i> create new task</a>
+        </div>
+        <div class="flex row-container aligned" style="flex-wrap: wrap"
+            *ngIf="(incompleteTasks$ | async).length > 0; else noTasks">
+            <div class="m-3" *ngFor="let task of (incompleteTasks$ | async)">
+                <app-task-summary [task]="task"></app-task-summary>
+            </div>
+        </div>
+    </div>
+    <!-- <hr /> -->
+    <a routerLink="/notes" style="color: #212529">
+        <h1>Recent Notes</h1>
+    </a>
+    <div class="recent-notes">
+        <div class="text-primary p-2 create">
+            <a routerLink="/notes/create"><i class="fas fa-plus"></i> create new note</a>
+        </div>
+        <div>
+            <div class="flex row-container aligned" style="flex-wrap: wrap"
+                *ngIf="(recentNotes$ | async).length > 0; else noNotes">
+                <div class="m-3" *ngFor="let note of (recentNotes$ | async)">
+                    <app-note-summary [note]="note"></app-note-summary>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #noNotes>
+    <div>
+        <h6>You don't have any notes yet!</h6>
+    </div>
+</ng-template>
+<ng-template #noTasks>
+    <div>
+        <h6>You don't have any tasks yet!</h6>
+    </div>
+</ng-template>
+<ng-template #noEvents>
+    <div>
+        <h6>You don't have any events yet!</h6>
+    </div>
+</ng-template>

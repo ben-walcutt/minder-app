@@ -1,0 +1,12 @@
+.login-wrapper {
+    margin-top: 200px;
+    
+}
+
+#forgotHelp:hover {
+    cursor: pointer;
+}
+
+#registerHelp:hover {
+    cursor: pointer;
+}

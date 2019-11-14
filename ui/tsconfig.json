@@ -1,0 +1,43 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "baseUrl": "./",
+    "outDir": "./dist/out-tsc",
+    "sourceMap": true,
+    "declaration": false,
+    "downlevelIteration": true,
+    "experimentalDecorators": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "importHelpers": true,
+    "target": "es2015",
+    "paths": {
+      "@models/*": [
+        "./src/app/shared/models/*"
+      ],
+      "@notes/*": [
+        "./src/app/features/notes/*"
+      ],
+      "@tasks/*": [
+        "./src/app/features/tasks/*"
+      ],
+      "@events/*": [
+        "./src/app/features/events/*"
+      ],
+      "@tags/*" : [
+        "./src/app/features/tags/*"
+      ]
+    },
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "lib": [
+      "es2018",
+      "dom"
+    ]
+  },
+  "angularCompilerOptions": {
+    "fullTemplateTypeCheck": true,
+    "strictInjectionParameters": true
+  }
+}

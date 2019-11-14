@@ -1,0 +1,37 @@
+/* You can add global styles to this file, and also import other style files */
+
+.light-blue-text {
+    color: #74b9ff;
+}
+
+.container {
+    display: flex;
+}
+
+.flex {
+    display: flex;
+}
+
+.row-container {
+    flex-direction: row;
+}
+
+.col-container {
+    flex-direction: column;
+}
+
+.content-around {
+    justify-content: space-around;
+}
+
+.content-between {
+    justify-content: space-between;
+}
+
+.content-center {
+    justify-content: center;
+}
+
+.aligned {
+    align-items: center;
+}

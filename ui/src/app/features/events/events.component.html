@@ -1,0 +1,25 @@
+<div class="container col-container">
+    <h1>Events</h1>
+    <div class="text-primary p-2 create">
+        <a routerLink="/events/create"><i class="fas fa-plus"></i> create new event</a>
+    </div>
+    <p-table [value]="events$ | async" selectionMode="single" [(selection)]="selectedEvent" rowKey="id"
+        (onRowSelect)="onRowSelect($event)">
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Title</th>
+                <th>Tags</th>
+                <th>Updated On</th>
+                <th>Start Time</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-event>
+            <tr [pSelectableRow]="event">
+                <td>{{ event.title.substring(0, 50)}}</td>
+                <td>{{generateBadges(event.tags)}}</td>
+                <td>{{ event.lastupdatetime | date:'short' }}</td>
+                <td>{{ event.starttime | date:'short' }}</td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>

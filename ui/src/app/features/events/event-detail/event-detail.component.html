@@ -1,0 +1,30 @@
+<div class="container col-container">
+    <form>
+        <h1>{{ event.title }}</h1>
+        <h6>Last updated on: {{ event.lastupdatetime | date:'short' }}</h6>
+        <div class="form-group">
+            <label for="eventTags">
+                <h5>Tags</h5>
+            </label>
+            <p-chips name="eventTags" [(ngModel)]="event.tags"></p-chips>
+        </div>
+        <div class="form-group">
+            <label for="eventStartTime">
+                <h5>Start time</h5>
+            </label><br />
+            <p-calendar id="eventStartTime" name="eventStartTime" [(ngModel)]="event.starttime" [showTime]="true">
+            </p-calendar>
+        </div>
+        <div class="form-group">
+            <label for="eventEndTime">
+                <h5>End time</h5>
+            </label><br />
+            <p-calendar id="eventEndTime" name="eventEndTime" [(ngModel)]="event.endtime" [showTime]="true">
+            </p-calendar>
+        </div>
+        <br />
+        <button class="btn btn-primary" style="width: 150px" (click)="updateEvent()">Update Event</button>
+        <br />
+        <button class="btn btn-warning" style="width: 150px" (click)="deleteEvent()">Delete Event</button>
+    </form>
+</div>

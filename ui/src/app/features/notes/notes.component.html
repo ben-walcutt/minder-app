@@ -1,0 +1,24 @@
+<div class="container col-container">
+    <h1>Notes</h1>
+    <div class="text-primary p-2 create">
+        <a routerLink="/notes/create"><i class="fas fa-plus"></i> create new note</a>
+    </div>
+    <p-table [value]="notes$ | async" selectionMode="single" [(selection)]="selectedNote" rowKey="id" (onRowSelect)="onRowSelect($event)">
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Title</th>
+            <th>Tags</th>
+            <th>Created On</th>
+            <th>Updated On</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-note>
+        <tr [pSelectableRow]="note">
+            <td>{{note.title.substring(0, 50)}}</td>
+            <td>{{generateBadges(note.tags)}}</td>
+            <td>{{note.createtime | date:'short'}}</td>
+            <td>{{note.lastupdatetime | date:'short'}}</td>
+        </tr>
+    </ng-template>
+</p-table>
+</div>

@@ -1,0 +1,41 @@
+<div class="container col-container">
+    <h1>{{ tag }}</h1>
+    <br />
+    <div class="events">
+        <h3>Events</h3>
+        <div class="related-events flex row-container" style="flex-wrap: wrap" *ngIf="filteredEvents.length > 0; else noEvents">
+            <div class="m-3" *ngFor="let event of filteredEvents">
+                <app-event-summary [event]="event"></app-event-summary>
+            </div>
+        </div>
+
+    </div>
+    <hr />
+    <div class="tasks">
+        <h3>Tasks</h3>
+        <div class="related-tasks flex row-container" style="flex-wrap: wrap" *ngIf="filteredTasks.length > 0; else noTasks">
+            <div class="m-3" *ngFor="let task of filteredTasks">
+                <app-task-summary [task]="task"></app-task-summary>
+            </div>
+        </div>
+    </div>
+    <hr />
+    <div class="notes">
+        <h3>Notes</h3>
+        <div class="related-notes flex row-container" style="flex-wrap: wrap" *ngIf="filteredNotes.length > 0; else noNotes">
+            <div class="m-3" *ngFor="let note of filteredNotes">
+                <app-note-summary [note]="note"></app-note-summary>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #noEvents>
+    <h6>No related events</h6>
+</ng-template>
+<ng-template #noTasks>
+    <h6>No related tasks</h6>
+</ng-template>
+<ng-template #noNotes>
+    <h6>No related notes</h6>
+</ng-template>

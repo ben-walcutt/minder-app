@@ -1,0 +1,24 @@
+<div class="container content-center">
+    <div class="flex col-container content-center aligned shadow-lg p-3 login-wrapper">
+        <div style="font-size: 30px">
+            <i class="fas fa-brain"></i> minder
+        </div>
+        <form>
+            <div class="form-group">
+                <label for="loginEmail">Email Address</label>
+                <input type="email" class="form-control" id="loginEmail" name="loginEmail" placeholder="Enter email" [(ngModel)]="email">
+                <small id="emailHelp" class="form-text text-muted">Minder can't read your mind.</small>
+            </div>
+            <div class="form-group">
+                <label for="loginPassword">Password</label>
+                <input type="password" class="form-control" id="loginPassword" name="loginPassword" placeholder="Password" [(ngModel)]="password">
+            </div>
+            <button type="submit" class="btn btn-primary" (click)="login()">Login</button>
+            <hr />
+            <div class="assistance flex row-container content-between">
+                <small id="forgotHelp" class="form-text text-muted">Forgot password?</small>
+                <small id="registerHelp" class="form-text text-muted">Register</small>
+            </div>
+        </form>
+    </div>
+</div>
