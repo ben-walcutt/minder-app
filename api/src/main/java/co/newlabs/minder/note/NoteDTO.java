@@ -24,7 +24,7 @@ public class NoteDTO {
         this.author = note.getAuthor();
         this.text = note.getText();
         this.title = note.getTitle();
-        this.createdTimestamp = note.getCreateDateTime();
-        this.lastUpdatedTimestamp = note.getLastUpdatedDateTime();
+        this.createdTimestamp = note.getCreatedTimestamp();
+        this.lastUpdatedTimestamp = note.getLastUpdatedTimestamp();
     }
 }

@@ -1,8 +1,8 @@
 package co.newlabs.minder;
 
-import co.newlabs.minder.note.Note;
-import co.newlabs.minder.note.NoteDTO;
-import co.newlabs.minder.note.NoteRepository;
+import co.newlabs.minder.task.Task;
+import co.newlabs.minder.task.TaskDTO;
+import co.newlabs.minder.task.TaskRepository;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.micronaut.runtime.server.EmbeddedServer;
@@ -15,6 +15,8 @@ import javax.inject.Inject;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import static io.restassured.RestAssured.given;
@@ -22,26 +24,26 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
 @MicronautTest
-public class NoteIT {
+public class TaskIT {
 
     @Inject
     private EmbeddedServer server;
 
     @Inject
-    private NoteRepository noteRepository;
+    private TaskRepository taskRepository;
 
     @Inject
     private ObjectMapper objectMapper;
 
     @BeforeEach
     public void beforeEach() {
-        noteRepository.deleteAll();
+        taskRepository.deleteAll();
     }
 
     @Test
-    public void testGetNotesForUser() throws IOException {
+    public void testGetTasksForUser() throws IOException {
         //ARRANGE
-        String requestBody = new String(Files.readAllBytes(Paths.get("src/test/resources/json/note/note.json")));
+        String requestBody = new String(Files.readAllBytes(Paths.get("src/test/resources/json/task/task.json")));
 
         given()
                 .log().all()
@@ -49,7 +51,7 @@ public class NoteIT {
                 .body(requestBody)
                 .when()
                 .port(server.getPort())
-                .post("/notes");
+                .post("/tasks");
 
         //ACT
         Response response = given()
@@ -57,29 +59,33 @@ public class NoteIT {
                                 .queryParam("userId", "author")
                             .when()
                             .port(server.getPort())
-                            .get("/notes");
+                            .get("/tasks");
 
         //ASSERT
         assertThat(response.getStatusCode(), is(200));
 
-        List<NoteDTO> notes = objectMapper.readValue(response.asString(), new TypeReference<List<NoteDTO>>(){});
-        assertThat(notes.size(), is(1));
+        List<TaskDTO> taskDTOS = objectMapper.readValue(response.asString(), new TypeReference<List<TaskDTO>>(){});
+        assertThat(taskDTOS.size(), is(1));
 
-        NoteDTO expected = NoteDTO.builder()
+        TaskDTO expected = TaskDTO.builder()
                 .author("author")
                 .text("text")
                 .title("title")
+                .completed(false)
+                .dueDateTimestamp(LocalDateTime.from(DateTimeFormatter.ISO_LOCAL_DATE_TIME.parse("2019-01-02T03:04:05.06")))
                 .build();
-        NoteDTO actual = notes.get(0);
+        TaskDTO actual = taskDTOS.get(0);
         assertThat(actual.getAuthor(), is(expected.getAuthor()));
         assertThat(actual.getText(), is(expected.getText()));
         assertThat(actual.getTitle(), is(expected.getTitle()));
+        assertThat(actual.getDueDateTimestamp(), is(expected.getDueDateTimestamp()));
+        assertThat(actual.isCompleted(), is(expected.isCompleted()));
     }
 
     @Test
-    public void testCreateNote() throws IOException {
+    public void testCreateTask() throws IOException {
         //ARRANGE
-        String requestBody = new String(Files.readAllBytes(Paths.get("src/test/resources/json/note/note.json")));
+        String requestBody = new String(Files.readAllBytes(Paths.get("src/test/resources/json/task/task.json")));
 
         //ACT
         Response response = given()
@@ -88,18 +94,23 @@ public class NoteIT {
                                 .body(requestBody)
                             .when()
                                 .port(server.getPort())
-                                .post("/notes");
+                                .post("/tasks");
 
         //ASSERT
         assertThat(response.getStatusCode(), is(200));
-        Note expected = Note.builder()
+        Task expected = Task.builder()
                 .author("author")
                 .text("text")
                 .title("title")
+                .completed(false)
+                .dueDateTimestamp(LocalDateTime.from(DateTimeFormatter.ISO_LOCAL_DATE_TIME.parse("2019-01-02T03:04:05.06")))
                 .build();
-        Note actual = response.as(Note.class);
+        Task actual = response.as(Task.class);
         assertThat(actual.getAuthor(), is(expected.getAuthor()));
         assertThat(actual.getText(), is(expected.getText()));
         assertThat(actual.getTitle(), is(expected.getTitle()));
+        assertThat(actual.getDueDateTimestamp(), is(expected.getDueDateTimestamp()));
+        assertThat(actual.isCompleted(), is(expected.isCompleted()));
     }
+
 }

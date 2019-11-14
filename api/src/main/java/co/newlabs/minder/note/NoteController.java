@@ -18,7 +18,7 @@ public class NoteController {
     }
 
     @Post(uri = "/notes", produces = MediaType.APPLICATION_JSON)
-    public Note createNote(@Body CreateNoteDTO createNoteDTO) {
-        return noteService.createNote(createNoteDTO);
+    public Note createNote(@Body NoteCreateDTO noteCreateDTO) {
+        return noteService.createNote(noteCreateDTO);
     }
 }

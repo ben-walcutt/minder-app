@@ -22,13 +22,13 @@ public class NoteService {
         return noteDTOS;
     }
 
-    public Note createNote(CreateNoteDTO createNoteDTO) {
+    public Note createNote(NoteCreateDTO noteCreateDTO) {
         Note note = Note.builder()
-                .author(createNoteDTO.getAuthor())
-                .title(createNoteDTO.getTitle())
-                .text(createNoteDTO.getText())
-                .createDateTime(LocalDateTime.now())
-                .lastUpdatedDateTime(LocalDateTime.now())
+                .author(noteCreateDTO.getAuthor())
+                .title(noteCreateDTO.getTitle())
+                .text(noteCreateDTO.getText())
+                .createdTimestamp(LocalDateTime.now())
+                .lastUpdatedTimestamp(LocalDateTime.now())
                 .build();
 
         return noteRepository.save(note);
